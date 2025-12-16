@@ -1,8 +1,32 @@
 version: "3.8"
 
 services:
+  db:
+    image: mariadb:10.6
+    container_name: mariadb_loupantail
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: loupantailDB
+      MYSQL_USER: loupantail
+      MYSQL_PASSWORD: loupantail
+    volumes:
+      - db_data:/var/lib/mysql
+
   backend:
     build: .
     container_name: backend_test
+    restart: always
     ports:
       - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: loupantail
+      DB_PASSWORD: loupantail
+      DB_NAME: loupantailDB
+      DB_PORT: 3306
+
+volumes:
+  db_data:
