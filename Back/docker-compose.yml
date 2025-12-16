@@ -3,36 +3,6 @@ version: "3.8"
 services:
   backend:
     build: .
-    container_name: garden_backend
+    container_name: backend_test
     ports:
       - "3000:3000"
-    env_file:
-      - .env
-    volumes:
-      - .:/app   # Hot reload, both people can work
-    depends_on:
-      - db
-    networks:
-      - garden_network
-
-  db:
-    image: mariadb:10.6
-    container_name: garden_db
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: garden
-      MYSQL_USER: garden
-      MYSQL_PASSWORD: garden
-    ports:
-      - "3306:3306" # optional for local DB access
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - garden_network
-
-volumes:
-  db_data:
-
-networks:
-  garden_network:
-    driver: bridge

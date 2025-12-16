@@ -1,0 +1,11 @@
+{
+  "name": "docker-test-backend",
+  "version": "1.0.0",
+  "main": "src/test.js",
+  "scripts": {
+    "test": "node src/test.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
